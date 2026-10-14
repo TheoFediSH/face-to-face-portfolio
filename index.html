@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fedir Shurkhal — FACE TO FACE · Multimedia Producer</title>
+<meta name="description" content="Multimedia producer & visual communicator based in Wien. Video, motion, 360/VR, content systems, project coordination." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --red: #9a1c22;
+    --red-deep: #7a1218;
+    --red-glow: #c43a2a;
+    --cyan: #00e6c8;
+    --ink: #0a0a0a;
+    --muted: #6b6b6b;
+    --line: #e6e6e6;
+    --paper: #fafafa;
+    --white: #ffffff;
+    --hero-text: #f3ece6;
+    --max: 1180px;
+    --font: "Archivo", "Space Grotesk", system-ui, -apple-system, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font);
+    color: var(--ink);
+    background: var(--white);
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; height: auto; }
+  button { font: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
+
+  /* ---------- GRAIN ---------- */
+  .grain {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    z-index: 6;
+    opacity: 0.28;
+    mix-blend-mode: soft-light;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  }
+
+  /* ---------- TOP BAR ---------- */
+  .topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.85rem 1.5rem;
+    background: rgba(10,10,10,0.35);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--white);
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+  }
+  .topbar a:hover { color: var(--cyan); }
+  .topbar-left { display: flex; gap: 1.1rem; align-items: center; flex-wrap: wrap; }
+  .topbar-phone { color: var(--cyan); font-weight: 700; letter-spacing: 0.04em; }
+  .topbar-nav { display: flex; gap: 1.25rem; }
+  .topbar-nav a { opacity: 0.85; font-weight: 500; }
+  .topbar-nav a:hover { opacity: 1; color: var(--cyan); }
+  .crosshair {
+    width: 14px; height: 14px; position: relative; opacity: 0.9;
+  }
+  .crosshair::before, .crosshair::after {
+    content: ""; position: absolute; background: var(--cyan);
+  }
+  .crosshair::before { width: 14px; height: 1.5px; top: 50%; left: 0; transform: translateY(-50%); }
+  .crosshair::after { height: 14px; width: 1.5px; left: 50%; top: 0; transform: translateX(-50%); }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    background:
+      radial-gradient(ellipse 55% 80% at 78% 45%, rgba(255,160,60,0.35) 0%, transparent 55%),
+      linear-gradient(105deg, var(--red-deep) 0%, var(--red) 42%, #b3262a 68%, #d45a28 100%);
+    color: var(--hero-text);
+    overflow: hidden;
+    padding: 5.5rem 1.5rem 3.5rem;
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: var(--max);
+    margin: 0 auto;
+    min-height: calc(100vh - 9rem);
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    grid-template-rows: auto 1fr auto;
+    gap: 1.5rem 2rem;
+  }
+  .hero-meta { grid-column: 1; grid-row: 1; }
+  .hero-phone {
+    color: var(--cyan);
+    font-weight: 800;
+    font-size: clamp(1.35rem, 2.4vw, 1.85rem);
+    letter-spacing: 0.02em;
+    margin-bottom: 0.55rem;
+  }
+  .hero-role { font-weight: 700; font-size: 1.05rem; color: #fff; }
+  .hero-subrole { font-weight: 400; font-size: 0.92rem; opacity: 0.88; margin-top: 0.15rem; }
+  .hero-loc {
+    margin-top: 1.1rem;
+    font-size: 0.82rem;
+    opacity: 0.9;
+    display: flex;
+    gap: 0.45rem;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+  .hero-loc strong { font-weight: 700; color: #fff; }
+  .hero-clock { font-variant-numeric: tabular-nums; letter-spacing: 0.06em; font-weight: 600; }
+
+  .hero-headline {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    position: relative;
+    align-self: center;
+    min-height: 42vh;
+    pointer-events: none;
+  }
+  .face-word {
+    font-weight: 900;
+    font-size: clamp(4.2rem, 14vw, 11.5rem);
+    line-height: 0.88;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    color: rgba(255, 236, 220, 0.92);
+    text-shadow: 0 0 40px rgba(255,140,60,0.15);
+  }
+  .face-left { position: absolute; left: 0; top: 8%; z-index: 3; }
+  .face-right {
+    position: absolute;
+    right: 0;
+    top: 28%;
+    z-index: 3;
+    text-align: right;
+  }
+  .face-to {
+    display: block;
+    font-size: 0.28em;
+    letter-spacing: 0.18em;
+    font-weight: 700;
+    margin-bottom: 0.15em;
+    opacity: 0.85;
+  }
+
+  .hero-portrait {
+    position: absolute;
+    left: 50%;
+    top: 46%;
+    transform: translate(-50%, -50%);
+    width: min(42vw, 460px);
+    z-index: 2;
+    filter: contrast(1.08) saturate(0.85) brightness(0.92);
+    mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
+  }
+  .hero-portrait img {
+    width: 100%;
+    mix-blend-mode: multiply;
+    filter: grayscale(0.15) contrast(1.15);
+    object-fit: cover;
+    object-position: center top;
+  }
+  .hero-portrait::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 55%, var(--red) 100%);
+    mix-blend-mode: multiply;
+    opacity: 0.55;
+  }
+
+  .hero-bottom {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 2rem;
+    align-items: end;
+    position: relative;
+    z-index: 4;
+  }
+  .hero-mission {
+    max-width: 34rem;
+    font-size: clamp(0.95rem, 1.4vw, 1.12rem);
+    font-weight: 500;
+    line-height: 1.45;
+    color: #fff;
+  }
+  .helping { margin-top: 1.35rem; }
+  .helping h3 {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.55rem;
+    color: #fff;
+  }
+  .helping ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.22rem;
+    font-size: 0.92rem;
+    opacity: 0.95;
+  }
+
+  .hero-inset {
+    justify-self: end;
+    display: flex;
+    align-items: stretch;
+    gap: 0.55rem;
+    max-width: 210px;
+  }
+  .hero-inset figure {
+    width: 150px;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    background: #111;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .hero-inset img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: contrast(1.05) saturate(0.9);
+  }
+  .hero-inset-label {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+    white-space: nowrap;
+  }
+
+  .hero-light {
+    position: absolute;
+    right: -8%;
+    top: -10%;
+    width: 42%;
+    height: 120%;
+    background: linear-gradient(100deg, transparent 0%, rgba(255,170,50,0.22) 40%, rgba(255,220,140,0.45) 55%, transparent 78%);
+    filter: blur(18px);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* ---------- QUOTE ---------- */
+  .quote-bar {
+    background: var(--white);
+    border-bottom: 1px solid var(--line);
+    padding: 2.4rem 1.5rem;
+  }
+  .quote-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+  .slide-hint {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+  .slide-dot {
+    width: 28px; height: 28px;
+    border: 1px solid #cfcfcf;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: 0.7rem;
+  }
+  .quote-text {
+    max-width: 28rem;
+    font-size: clamp(1.15rem, 2vw, 1.45rem);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+
+  /* ---------- SECTIONS ---------- */
+  .section {
+    padding: 5.5rem 1.5rem;
+    background: var(--white);
+  }
+  .section.alt { background: var(--paper); }
+  .section-inner { max-width: var(--max); margin: 0 auto; }
+  .section-head {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+  .section-head h2 {
+    font-size: clamp(1.6rem, 3.2vw, 2.35rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+  }
+  .section-code {
+    margin-top: 0.35rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+  .arrow-down { display: inline-block; margin-left: 0.25rem; opacity: 0.55; font-size: 0.75em; }
+
+  .who-copy {
+    max-width: 42rem;
+    margin: 0 auto;
+    font-size: clamp(1.15rem, 2.1vw, 1.55rem);
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+    text-align: left;
+  }
+  .who-copy p + p { margin-top: 1.4rem; }
+  .who-copy .accent {
+    color: var(--muted);
+    font-weight: 500;
+    font-size: 0.92em;
+  }
+
+  /* ---------- PAIN POINTS ---------- */
+  .pain-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4.5rem;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+  .pain-item { }
+  .pain-badge {
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--ink);
+    border-radius: 50%;
+    display: grid; place-items: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+  .pain-item h3 {
+    font-size: clamp(1.55rem, 3.2vw, 2.35rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 1.25rem;
+    max-width: 18ch;
+  }
+  .pain-card {
+    width: 100%;
+    aspect-ratio: 16 / 7.2;
+    overflow: hidden;
+    background: #111;
+    position: relative;
+  }
+  .pain-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: contrast(1.05) saturate(0.92);
+  }
+  .pain-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(154,28,34,0.18), transparent 40%);
+    pointer-events: none;
+  }
+
+  .bridge {
+    margin-top: 5rem;
+    text-align: center;
+    max-width: 28rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .bridge p {
+    font-size: clamp(1.05rem, 2vw, 1.3rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .bridge .sub {
+    margin-top: 0.85rem;
+    color: var(--muted);
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+
+  /* ---------- WORKS ---------- */
+  .works-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+  .work-card {
+    border: 1px solid var(--line);
+    background: var(--white);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .work-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+  }
+  .work-card.wide { grid-column: 1 / -1; display: grid; grid-template-columns: 1.15fr 0.85fr; }
+  .work-media {
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    background: #111;
+  }
+  .work-card.wide .work-media { aspect-ratio: auto; min-height: 280px; height: 100%; }
+  .work-media img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .work-card:hover .work-media img { transform: scale(1.03); }
+  .work-body { padding: 1.35rem 1.4rem 1.55rem; display: flex; flex-direction: column; gap: 0.65rem; }
+  .work-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .work-body h3 {
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .work-body p {
+    font-size: 0.95rem;
+    color: #333;
+    line-height: 1.5;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: auto; padding-top: 0.5rem; }
+  .tag {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    padding: 0.28rem 0.55rem;
+    border: 1px solid var(--line);
+    background: var(--paper);
+  }
+
+  /* ---------- PROCESS ---------- */
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+  }
+  .process-step {
+    border-top: 2px solid var(--ink);
+    padding-top: 1.1rem;
+  }
+  .process-num {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--red);
+    letter-spacing: 0.06em;
+    margin-bottom: 0.65rem;
+  }
+  .process-step h3 {
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.55rem;
+  }
+  .process-step p {
+    font-size: 0.88rem;
+    color: #444;
+    line-height: 1.45;
+  }
+
+  /* ---------- PARTNER / FOOTER ---------- */
+  .partner {
+    background: var(--ink);
+    color: var(--white);
+    padding: 5.5rem 1.5rem 3rem;
+  }
+  .partner-inner { max-width: var(--max); margin: 0 auto; }
+  .partner-head { margin-bottom: 2.5rem; max-width: 40rem; }
+  .partner-head .code { color: rgba(255,255,255,0.45); font-size: 0.85rem; margin-bottom: 0.5rem; }
+  .partner-head h2 {
+    font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+  .partner-head p {
+    font-size: 1.05rem;
+    opacity: 0.85;
+    line-height: 1.5;
+  }
+  .pill-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    margin: 2.5rem 0 3.5rem;
+  }
+  .pill {
+    border: 1px solid rgba(255,255,255,0.22);
+    padding: 0.55rem 0.9rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    border-radius: 999px;
+  }
+  .pill.accent { border-color: var(--cyan); color: var(--cyan); }
+
+  .cta-block {
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 2.5rem;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  .cta-block h3 {
+    font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.25rem;
+  }
+  .cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.85rem 1.25rem;
+    font-weight: 700;
+    font-size: 0.88rem;
+    letter-spacing: 0.02em;
+    border: 1px solid rgba(255,255,255,0.35);
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .btn:hover { border-color: var(--cyan); color: var(--cyan); }
+  .btn.primary {
+    background: var(--cyan);
+    color: #002822;
+    border-color: var(--cyan);
+  }
+  .btn.primary:hover { background: #fff; border-color: #fff; color: #002822; }
+
+  .contact-card {
+    border: 1px solid rgba(255,255,255,0.18);
+    padding: 1.35rem 1.4rem;
+    background: rgba(255,255,255,0.03);
+  }
+  .contact-card dl { display: grid; gap: 0.85rem; }
+  .contact-card dt {
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 0.2rem;
+  }
+  .contact-card dd { font-weight: 600; font-size: 0.98rem; }
+  .contact-card a:hover { color: var(--cyan); }
+
+  .site-footer {
+    margin-top: 3.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.45);
+  }
+  .site-footer a:hover { color: var(--cyan); }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 960px) {
+    .hero-inner {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto auto;
+    }
+    .hero-headline { min-height: 38vh; }
+    .face-word { font-size: clamp(3.4rem, 18vw, 6.5rem); }
+    .face-left { top: 0; }
+    .face-right { top: 42%; right: 0; }
+    .hero-portrait {
+      width: min(68vw, 340px);
+      top: 52%;
+    }
+    .hero-bottom { grid-template-columns: 1fr; }
+    .hero-inset { justify-self: start; }
+    .works-grid { grid-template-columns: 1fr; }
+    .work-card.wide { grid-template-columns: 1fr; }
+    .process-grid { grid-template-columns: 1fr 1fr; }
+    .cta-block { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .topbar { padding: 0.7rem 1rem; }
+    .topbar-nav { display: none; }
+    .hero { padding: 4.8rem 1rem 2.5rem; }
+    .quote-inner { flex-direction: column; }
+    .process-grid { grid-template-columns: 1fr; }
+    .pain-item h3 { max-width: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-left">
+    <a class="topbar-phone" href="tel:+436765711373">+43 676 5711373</a>
+    <span>Fedir</span>
+    <a href="https://linkedin.com/in/fedirsh" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="mailto:fedir@shurkhal.com">Email</a>
+  </div>
+  <div class="crosshair" aria-hidden="true"></div>
+  <nav class="topbar-nav" aria-label="Primary">
+    <a href="#main">Main</a>
+    <a href="#works">Works</a>
+    <a href="#process">Process</a>
+  </nav>
+</header>
+
+<section class="hero" id="main">
+  <div class="grain" aria-hidden="true"></div>
+  <div class="hero-light" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="hero-meta">
+      <div class="hero-phone"><a href="tel:+436765711373">+43 676 5711373</a></div>
+      <div class="hero-role">Multimedia Producer</div>
+      <div class="hero-subrole">Visual Communication · Video · 360/VR</div>
+      <div class="hero-loc">
+        <span>Currently in</span>
+        <strong>Wien</strong>
+        <span class="hero-clock" id="wien-clock" aria-live="polite">--:-- --</span>
+      </div>
+    </div>
+
+    <div class="hero-headline" aria-label="FACE TO FACE">
+      <div class="face-word face-left">FACE</div>
+      <div class="hero-portrait">
+        <img
+          src="https://fedir-portfolio-toggle.theofdare.chatgpt.site/assets/images/fedir-profile-card.jpg"
+          alt="Portrait of Fedir Shurkhal"
+          width="640"
+          height="800"
+        />
+      </div>
+      <div class="face-word face-right"><span class="face-to">TO</span>FACE</div>
+    </div>
+
+    <div class="hero-bottom">
+      <div>
+        <p class="hero-mission">
+          Navigating multimedia production with a personal touch — from concepts and motion to immersive 360/VR and clear project coordination in Wien.
+        </p>
+        <div class="helping">
+          <h3>Helping with:</h3>
+          <ul>
+            <li>Creative Concepts / Visual Direction</li>
+            <li>Video &amp; Motion Production</li>
+            <li>Social &amp; Educational Content Systems</li>
+            <li>360/VR &amp; Virtual Tours</li>
+            <li>Project Coordination &amp; Multilingual Communication</li>
+          </ul>
+        </div>
+      </div>
+      <div class="hero-inset">
+        <figure>
+          <img
+            src="https://fedir-portfolio-toggle.theofdare.chatgpt.site/assets/media/Fedir_Shurkhal_Showreel_2026_Poster.jpg"
+            alt="Still from Showreel 2026"
+            width="300"
+            height="400"
+          />
+        </figure>
+        <span class="hero-inset-label">Showreel 2026</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quote-bar">
+  <div class="quote-inner">
+    <div class="slide-hint">
+      <span class="slide-dot">1</span>
+      <span>1 / 2</span>
+    </div>
+    <p class="quote-text">
+      It’s not about how good you are, it’s about how much better you can become.<br />
+      <span style="font-weight:500;color:var(--muted);font-size:0.85em;">So how good do you really want to be?</span>
+    </p>
+  </div>
+</section>
+
+<section class="section" id="who">
+  <div class="section-inner">
+    <div class="section-head">
+      <h2>Who I Am <span class="arrow-down">▾</span></h2>
+      <div class="section-code">__001.</div>
+    </div>
+    <div class="who-copy">
+      <p>When you start a new multimedia project, it’s essential to choose the right road — brief, crew, format, delivery.</p>
+      <p>Thankfully, I’ve been on that highway before: from educational video systems to 360/VR and live event media in Wien.</p>
+      <p class="accent">Visualize a path where your time and budget are not just spent, but invested in clear communication and lasting assets.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="help">
+  <div class="section-inner">
+    <div class="section-head">
+      <h2>I’m here for you if <span class="arrow-down">▾</span></h2>
+      <div class="section-code">__002.</div>
+    </div>
+
+    <div class="pain-list">
+      <article class="pain-item">
+        <div class="pain-badge">A</div>
+        <h3>Production timelines<br />keep slipping</h3>
+        <div class="pain-card">
+          <img
+            src="https://fedir-portfolio-toggle.theofdare.chatgpt.site/assets/media/Fedir_Shurkhal_Showreel_2026_Poster.jpg"
+            alt="Production still — Showreel 2026"
+          />
+        </div>
+      </article>
+
+      <article class="pain-item">
+        <div class="pain-badge">B</div>
+        <h3>Stakeholders lost<br />in the media pipeline</h3>
+        <div class="pain-card">
+          <img
+            src="https://fedir-portfolio-toggle.theofdare.chatgpt.site/assets/media/vr_case.jpg"
+            alt="VR / immersive media frame"
+          />
+        </div>
+      </article>
+
+      <article class="pain-item">
+        <div class="pain-badge">C</div>
+        <h3>Afraid of unclear<br />freelance handoffs</h3>
+        <div class="pain-card">
+          <img
+            src="https://fedir-portfolio-toggle.theofdare.chatgpt.site/assets/media/room-tour-360-concept-frame.png"
+            alt="360 room-tour concept frame"
+          />
+        </div>
+      </article>
+
+      <article class="pain-item">
+        <div class="pain-badge">D</div>
+        <h3>You need sharper<br />visual quality</h3>
+        <div class="pain-card">
+          <img
+            src="https://fedir-portfolio-toggle.theofdare.chatgpt.site/assets/images/fedir-cv-preview.jpg"
+            alt="Visual / CV preview still"
+          />
+        </div>
+      </article>
+    </div>
+
+    <div class="bridge">
+      <p>Next, let’s look at projects shaped without these blockers.</p>
+      <p class="sub">Selected collaborations and production work — team-aware, honest scope.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="works">
+  <div class="section-inner">
+    <div class="section-head">
+      <h2>Selected works <span class="arrow-down">▾</span></h2>
+      <div class="section-code">__003.</div>
+    </div>
+
+    <div class="works-grid">
+      <article class="work-card wide">
+        <div class="work-media">
+          <img
+            src="https://fedir-portfolio-toggle.theofdare.chatgpt.site/assets/media/Fedir_Shurkhal_Showreel_2026_Poster.jpg"
+            alt="Schrack for Students / educational motion"
+          />
+        </div>
+        <div class="work-body">
+          <span class="work-eyebrow">Content system · Wien</span>
+          <h3>Schrack for Students</h3>
+          <p>
+            Contribution to a student media presence: educational video formats, YouTube motion assets,
+            social adaptations and ongoing content rhythm — part of a larger production pipeline
+            (platform grew past 43k subscribers / 1.2M views across 200+ videos as a team effort).
+          </p>
+          <div class="tags">
+            <span class="tag">Educational Content</span>
+            <span class="tag">Motion</span>
+            <span class="tag">YouTube</span>
+            <span class="tag">Brand Systems</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="work-card">
+        <div class="work-media">
+          <img
+            src="https://fedir-portfolio-toggle.theofdare.chatgpt.site/assets/images/fedir-cv-preview.jpg"
+            alt="WARHELP.EU communication work"
+          />
+        </div>
+        <div class="work-body">
+          <span class="work-eyebrow">NGO communication</span>
+          <h3>WARHELP.EU</h3>
+          <p>
+            Communication and coordination support for a Ukraine-aid initiative:
+            structure, public messaging, volunteers, and multilingual alignment.
+          </p>
+          <div class="tags">
+            <span class="tag">NGO</span>
+            <span class="tag">Coordination</span>
+            <span class="tag">Multilingual</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="work-card">
+        <div class="work-media">
+          <img
+            src="https://fedir-portfolio-toggle.theofdare.chatgpt.site/assets/media/room-tour-360-concept-frame.png"
+            alt="360 virtual tour concept"
+          />
+        </div>
+        <div class="work-body">
+          <span class="work-eyebrow">360 / 8K concept</span>
+          <h3>Virtuelle Rundgänge</h3>
+          <p>
+            Service concept for 8K/360 walkthroughs in real-estate, campus and education spaces.
+            Focus: orientation, image quality, and a clean production workflow.
+          </p>
+          <div class="tags">
+            <span class="tag">360 Workflow</span>
+            <span class="tag">VR</span>
+            <span class="tag">Space Presentation</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="work-card wide">
+        <div class="work-media">
+          <img
+            src="https://fedir-portfolio-toggle.theofdare.chatgpt.site/assets/media/vr_case.jpg"
+            alt="Showreel and immersive media"
+          />
+        </div>
+        <div class="work-body">
+          <span class="work-eyebrow">Film · Event · Immersive</span>
+          <h3>Showreel 2026 &amp; immersive media</h3>
+          <p>
+            Condensed selection across film, event media, motion and visual production —
+            including VR/360 collaboration contexts (e.g. Dayholi immersive projects).
+            Role: cinematography, editing and creative contribution within teams.
+          </p>
+          <div class="tags">
+            <span class="tag">Showreel</span>
+            <span class="tag">Event Film</span>
+            <span class="tag">360/VR</span>
+            <span class="tag">Team Production</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section alt" id="process">
+  <div class="section-inner">
+    <div class="section-head">
+      <h2>The Process <span class="arrow-down">▾</span></h2>
+      <div class="section-code">__004.</div>
+    </div>
+    <div class="process-grid">
+      <article class="process-step">
+        <div class="process-num">01</div>
+        <h3>Listen &amp; frame</h3>
+        <p>Clarify goals, audience, languages and constraints before cameras roll.</p>
+      </article>
+      <article class="process-step">
+        <div class="process-num">02</div>
+        <h3>Concept</h3>
+        <p>Visual direction, format choices, shot lists and realistic delivery milestones.</p>
+      </article>
+      <article class="process-step">
+        <div class="process-num">03</div>
+        <h3>Produce</h3>
+        <p>Shoot, capture 360 where needed, coordinate crew and keep stakeholders aligned.</p>
+      </article>
+      <article class="process-step">
+        <div class="process-num">04</div>
+        <h3>Craft</h3>
+        <p>Edit, motion, sound and system packaging — assets ready for channels that matter.</p>
+      </article>
+      <article class="process-step">
+        <div class="process-num">05</div>
+        <h3>Hand over</h3>
+        <p>Clean files, documentation and optional iteration so the work keeps working.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="partner" id="contact">
+  <div class="partner-inner">
+    <div class="partner-head">
+      <div class="code">__005. · Who needs me</div>
+      <h2>Let’s redefine the relationship. Not only a contractor.</h2>
+      <p>
+        A partner in your mission, a colleague in your production team,
+        a helping hand when timelines tighten — and a clear communicator across Ukrainian, Russian, German and English.
+      </p>
+    </div>
+
+    <div class="pill-cloud">
+      <span class="pill accent">Video &amp; Motion</span>
+      <span class="pill">360 / VR Tours</span>
+      <span class="pill">Educational Content</span>
+      <span class="pill">Event Media</span>
+      <span class="pill">Visual Direction</span>
+      <span class="pill">Project Coordination</span>
+      <span class="pill">AI-assisted workflows</span>
+      <span class="pill">Multilingual delivery</span>
+      <span class="pill">and moooooore</span>
+    </div>
+
+    <div class="cta-block">
+      <div>
+        <h3>Alright — need someone who can handle it?</h3>
+        <div class="cta-actions">
+          <a class="btn primary" href="tel:+436765711373">Call +43 676 5711373</a>
+          <a class="btn" href="mailto:fedir@shurkhal.com">Message fedir@shurkhal.com</a>
+          <a class="btn" href="https://fedir-portfolio-toggle.theofdare.chatgpt.site/assets/cv/Fedir_Shurkhal_Master_CV_2026.pdf" target="_blank" rel="noopener">Download CV (PDF)</a>
+          <a class="btn" href="https://linkedin.com/in/fedirsh" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+      <aside class="contact-card">
+        <dl>
+          <div>
+            <dt>Name</dt>
+            <dd>Fedir Shurkhal</dd>
+          </div>
+          <div>
+            <dt>Based</dt>
+            <dd>Wien, Österreich</dd>
+          </div>
+          <div>
+            <dt>Phone</dt>
+            <dd><a href="tel:+436765711373">+43 676 5711373</a></dd>
+          </div>
+          <div>
+            <dt>Email</dt>
+            <dd><a href="mailto:fedir@shurkhal.com">fedir@shurkhal.com</a></dd>
+          </div>
+          <div>
+            <dt>Study</dt>
+            <dd>Universität für angewandte Kunst Wien · Digitale Kunst</dd>
+          </div>
+          <div>
+            <dt>Languages</dt>
+            <dd>Ukrainian · Russian · German · English</dd>
+          </div>
+        </dl>
+      </aside>
+    </div>
+
+    <footer class="site-footer">
+      <span>FACE TO FACE · design-direction clone adapted for Fedir Shurkhal</span>
+      <span>
+        <a href="#main">Main</a> ·
+        <a href="#works">Works</a> ·
+        <a href="#process">Process</a>
+      </span>
+    </footer>
+  </div>
+</section>
+
+<script>
+(function () {
+  var el = document.getElementById("wien-clock");
+  if (!el) return;
+  function tick() {
+    try {
+      var parts = new Intl.DateTimeFormat("en-US", {
+        timeZone: "Europe/Vienna",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true
+      }).formatToParts(new Date());
+      var map = {};
+      parts.forEach(function (p) { map[p.type] = p.value; });
+      el.textContent = (map.hour || "--") + ":" + (map.minute || "--") + " " + (map.dayPeriod || "");
+    } catch (e) {
+      el.textContent = new Date().toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+    }
+  }
+  tick();
+  setInterval(tick, 15000);
+})();
+</script>
+</body>
+</html>
